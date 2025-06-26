@@ -12,6 +12,7 @@ class Hero(Enum):
     ASafiya = auto()
     AShemira = auto()
     ASolise = auto()
+    ATalene = auto()
     AThane = auto()
     AThoran = auto()
     Adrian_Elyse = auto()

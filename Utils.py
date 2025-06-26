@@ -5,7 +5,7 @@ from Hero import Hero
 from Comp import Comp
 
 # Tune these constants
-priority_order = [2, 3, 1, 4, 5, 6] # 1-based
+priority_order = [5, 2, 1, 4, 6, 3] # 1-based
 POSITION_WEIGHT = 10
 BLANK_SLOT_PENALTY = 1000
 
@@ -123,10 +123,14 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
         if best_team is not None:
             used_heroes.update(h for h in best_team if h != Hero.BLANK)
 
+    return assigned_teams
+
+def print_result(assigned_teams: List[List[str]], battles: List[Comp], my_heroes: List[Hero]):
+
     formatted_teams = []
     for i, team in enumerate(assigned_teams, start=1):
         if team is None:
-            formatted_teams.append((battles[i].mode, battles[i].name, None, None))
+            formatted_teams.append((battles[i-1].mode, battles[i-1].name, None, None))
             continue
         score = cached_score_team(tuple(team))
         printable_team = []
@@ -158,8 +162,6 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
         else:
             print(f"{label:<{team_name_length}}: {team_str:<{team_comp_length}} -> Score: {score}")
 
-    return assigned_teams
-
 def expand_team(template: List[Union[str, List[str]]]) -> List[List[str]]:
     expanded_slots = [
         [slot] if isinstance(slot, str) else slot
@@ -189,6 +191,7 @@ def convert_nested_hero_lists_to_enum(data):
     elif isinstance(data, Comp):
         return convert_nested_hero_lists_to_enum(data.comps)
     else:
+        # Return the Hero enum value
         return data
 
 def FindBest(battles, my_heroes):
@@ -200,9 +203,10 @@ def FindBest(battles, my_heroes):
     for battle_teams in comps:
         new_teams = []
         for team in battle_teams:
-            partial_variants = generate_partial_blank_variants(team, max_blanks=5)
+            partial_variants = generate_partial_blank_variants(team, max_blanks=1)
             new_teams.extend(partial_variants)
         filtered = deduplicate_and_validate_battle_comps(new_teams)
         expanded_recommended_comps_per_battle.append(filtered)
 
     best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle, battles)
+    print_result(best_set, battles, my_heroes)

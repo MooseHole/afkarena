@@ -1,41 +1,42 @@
-from Utils import convert_nested_hero_lists_to_enum
-import ast
+from Hero import Hero as h
 
-hero_list_raw = '''
-        "Ainz", "Lucretia", "Liberta", "Drez", "Albedo",
-        "Daimon", "Rem", "Arthur", "Merlin", "Elijah-Lailah",
-        "Lucius", "Randle", "Silas", "Shalltear", "Shemira",
-        "Knox", "Bronn", "Shuna", "Lyca", "Rowan",
-        "Grezhul", "Palmer", "Ferael", "Thoran", "Safiya", 
-        "Talene", "Robin-Hood", "Raku", "Kaz", "Satrana",
-        "Nara", "Rimuru", "Numisu", "Prince-Persia", "Belinda",
-        "Gwyneth", "Naroko", "Mortas", "Jerome", "Rosaline",
-        "Eironn", "Athalia", "Scarlet", "Nyla", "Kelthur",
-        "Emilia", "Mishka", "Saurus", "Mulan", "Baden",
-        "Antandra", "Izold", "Misha", "Pippa", "Leonardo",
-        "Lady-Simona", "Joan-Arc", "Treznor", "Khasos", "Brutus",
-        "Cecilia", "Wu-Kong", "Estrilda", "Anasta", "Tasi",
-        "Nemora", "Theowyn", "Kren", "Tidus", "Lorsan",
-        "Laios", "Desira", "Ginneas", "Fawkes", "Edwin",
-        "Oku", "Hodgkin", "Raine", "Skraith", "Rigby",
-        "Vika", "Melusina", "Seirus", "Nevanthi", "Gorvo",
-        "Geralt", "Crassio", "Vurk", "Isabella", "Villanelle",
-        "Salaki", "Warek", "Eorin", "Trishea", "Gorren",
-        "Thali", "Astar", "Fane", "Oden", "Alaro",
-        "Kalene", "Flora", "Solise", "Thesku", "Granit",
-        "Adrian-Elyse", "Ivan", "Marcille", "Tamrus", "Peggy",
-        "Hendrik", "Ulmus", "Thane", "Morrow", "Walker",
-        "Respen", "Torne", "Eluard", "Anoki", "Skreg",
-        "Oscar", "Queen", "Raoul", "Atheus", "Hildwin",
-        "Sonja", "Mira", "AThoran", "AShemira", "Zaphrael",
-        "Eugene", "Velufira", "Melion", "Lavatune", "Aurelia",
-        "Kalthin", "Talene", "Zolrath", "Alna", "Khazard",
-        "Envydiel", "Gavus", "AEzizh", "Kregor", "ASolise",
-        "ABelinda", "Skylan", "Daemia", "DGwyneth", "Maetria",
-        "Canisa-Ruke", "Mezoth", "Mehira", "AThane", "AAthalia",
-        "ABrutus", "Audrae", "Lucilla", "Olgath", "Tarnos",
-        "Zikis", "Framton", "Morael", "Orthros", "Cassius",
-        "Titus", "Vyloris", "Leofric",
-    '''
-hero_list = ast.literal_eval(f"[{hero_list_raw}]")
-my_heroes = convert_nested_hero_lists_to_enum(hero_list)
+# My heroes sorted by CMBR June 26, 2025
+# REMOVING Tarnos from resonance
+# Should RESONATE Veithael
+# Should RESONATE Orthros
+# Should ACQUIRE Zohra
+my_heroes = [
+    h.Ainz, h.Lucretia, h.Liberta, h.Drez, h.Albedo,
+    h.Daimon, h.Rem, h.Arthur, h.Merlin, h.Elijah_Lailah,
+    h.Randle, h.Lucius, h.Silas, h.Shalltear, h.Shemira,
+    h.Knox, h.Bronn, h.Shuna, h.Lyca, h.Rowan,
+    h.Grezhul, h.Palmer, h.Ferael, h.Thoran, h.Safiya,
+    h.Hildwin, h.ATalene, h.Robin_Hood, h.Raku, h.Kaz,
+    h.Satrana, h.Nara, h.Rimuru, h.Numisu, h.Prince_Persia,
+    h.Belinda, h.Gwyneth, h.Naroko, h.Mortas, h.Jerome,
+    h.Rosaline, h.Eironn, h.Athalia, h.Scarlet, h.Nyla,
+    h.Kelthur, h.Emilia, h.Mishka, h.Saurus, h.Mulan,
+    h.Baden, h.Antandra, h.AThoran, h.Izold, h.Misha,
+    h.Pippa, h.Leonardo, h.Lady_Simona, h.Joan_Arc, h.Treznor,
+    h.Khasos, h.Brutus, h.Cecilia, h.Wu_Kong, h.Estrilda,
+    h.Anasta, h.AShemira, h.Eugene, h.Tasi, h.Nemora,
+    h.Theowyn, h.Kren, h.Tidus, h.Lorsan, h.Laios,
+    h.Desira, h.Ginneas, h.Fawkes, h.Edwin, h.Oku,
+    h.Hodgkin, h.Raine, h.Skraith, h.Rigby, h.Vika,
+    h.Melusina, h.Seirus, h.Nevanthi, h.Gorvo, h.Geralt,
+    h.Crassio, h.Vurk, h.Isabella, h.Villanelle, h.Salaki,
+    h.Raoul, h.Warek, h.Eorin, h.Trishea, h.Gorren,
+    h.Thali, h.Astar, h.Fane, h.Oden, h.Alaro,
+    h.Kalene, h.Flora, h.Solise, h.Thesku, h.Granit,
+    h.Adrian_Elyse, h.Velufira, h.Ivan, h.Marcille, h.Sonja,
+    h.Tamrus, h.Atheus, h.Peggy, h.Mira, h.Hendrik,
+    h.Ulmus, h.Thane, h.Morrow, h.Walker, h.Respen,
+    h.Torne, h.Eluard, h.Zaphrael, h.Anoki, h.Skreg,
+    h.Oscar, h.Queen, h.Melion, h.Lavatune, h.Aurelia,
+    h.Kalthin, h.Zolrath, h.Envydiel, h.Gavus, h.Talene,
+    h.Alna, h.Khazard, h.AEzizh, h.Kregor, h.AAthalia,
+    h.ABrutus, h.ASolise, h.AThane, h.ABelinda, h.Skylan,
+    h.Daemia,h.DGwyneth, h.Maetria, h.Canisa_Ruke, h.Mezoth,
+    h.Lucilla, h.Mehira, h.Olgath, h.Tarnos, h.Zikis,
+    h.Titus, h.Vyloris, h.Leofric, h.Orthros, h.Veithael
+    ]
