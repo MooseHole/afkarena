@@ -1,4 +1,5 @@
 from Utils import *
+from Comp import *
 
 # From https://afk.guide/nightmare-corridor-guide-teams/
 recommended_comps_per_battle = [
@@ -80,3 +81,11 @@ recommended_comps_per_battle = [
     deduplicate_and_validate_battle_comps(battle)
     for battle in recommended_comps_per_battle
 ]
+
+thisMode = "Nightmare Corridor"
+battles = [ Comp(thisMode, "Battle 1 - Astral Devourer", recommended_comps_per_battle[0]),
+            Comp(thisMode, "Battle 2 - Fractured Fool", recommended_comps_per_battle[1]),
+            Comp(thisMode, "Battle 3 - Abyssal Murmur", recommended_comps_per_battle[2]),
+            Comp(thisMode, "Battle 4 - Clawlossus", recommended_comps_per_battle[3]),
+            Comp(thisMode, "Battle 5 - Sky Serpent", recommended_comps_per_battle[4]),
+            Comp(thisMode, "Battle 6 - Nightmare Weaver", recommended_comps_per_battle[5]) ]

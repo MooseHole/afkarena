@@ -6,8 +6,8 @@ hero_list_raw = '''
         "Daimon", "Rem", "Arthur", "Merlin", "Elijah-Lailah",
         "Lucius", "Randle", "Silas", "Shalltear", "Shemira",
         "Knox", "Bronn", "Shuna", "Lyca", "Rowan",
-        "Grezhul", "Palmer", "Ferael", "Thoran", "Safiya"
-        , "Talene", "Robin-Hood", "Raku", "Kaz", "Satrana",
+        "Grezhul", "Palmer", "Ferael", "Thoran", "Safiya", 
+        "Talene", "Robin-Hood", "Raku", "Kaz", "Satrana",
         "Nara", "Rimuru", "Numisu", "Prince-Persia", "Belinda",
         "Gwyneth", "Naroko", "Mortas", "Jerome", "Rosaline",
         "Eironn", "Athalia", "Scarlet", "Nyla", "Kelthur",

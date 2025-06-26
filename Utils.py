@@ -2,6 +2,7 @@ from itertools import product, combinations, islice
 from functools import lru_cache
 from typing import List, Union
 from Hero import Hero
+from Comp import Comp
 
 # Tune these constants
 priority_order = [2, 3, 1, 4, 5, 6] # 1-based
@@ -77,7 +78,7 @@ def evaluate_combinations(args):
             local_best_indexes = combo_indexes
     return local_best_score, local_best_combo, local_best_indexes
 
-def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List[List[List[Hero]]]) -> List[List[Hero]]:
+def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List[List[List[Hero]]], battles: List[Comp]) -> List[List[Hero]]:
     global global_ranking
     global_ranking = rank_heroes(my_heroes)
 
@@ -125,7 +126,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
     print("\n=== Priority-Based Team Breakdown ===")
     for i, team in enumerate(assigned_teams, start=1):
         if team is None:
-            print(f"Battle {i}: No team assigned.")
+            print(f"{battles[i-1].mode} {battles[i-1].name}: No team assigned.")
             continue
         score = cached_score_team(tuple(team))
         printable_team = []
@@ -142,7 +143,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
                 printable_team.append(f"BLANK({name})")
             else:
                 printable_team.append(name)
-        print(f"Battle {i}: {', '.join(printable_team)} -> Score: {score}")
+        print(f"{battles[i-1].mode} {battles[i-1].name}: {', '.join(printable_team)} -> Score: {score}")
 
     return assigned_teams
 
@@ -172,13 +173,15 @@ def convert_nested_hero_lists_to_enum(data):
         return Hero[data.replace('-', '_').replace(' ', '_').replace('.', '')]
     elif isinstance(data, list):
         return [convert_nested_hero_lists_to_enum(x) for x in data]
+    elif isinstance(data, Comp):
+        return convert_nested_hero_lists_to_enum(data.comps)
     else:
         return data
 
-def FindBest(comps, my_heroes):
+def FindBest(battles, my_heroes):
     initialize()
 
-    comps = convert_nested_hero_lists_to_enum(comps)
+    comps = convert_nested_hero_lists_to_enum(battles)
 
     expanded_recommended_comps_per_battle = []
     for battle_teams in comps:
@@ -189,4 +192,4 @@ def FindBest(comps, my_heroes):
         filtered = deduplicate_and_validate_battle_comps(new_teams)
         expanded_recommended_comps_per_battle.append(filtered)
 
-    best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle)
+    best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle, battles)
