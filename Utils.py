@@ -5,7 +5,6 @@ from Hero import Hero
 from Comp import Comp
 
 # Tune these constants
-priority_order = [5, 2, 1, 4, 6, 3] # 1-based
 POSITION_WEIGHT = 10
 BLANK_SLOT_PENALTY = 1000
 
@@ -27,10 +26,10 @@ def cached_score_team(team_tuple):
             score += global_ranking.get(hero, -BLANK_SLOT_PENALTY)
     return score
 
-def rank_heroes(heroes: List[str]) -> dict:
+def rank_heroes(heroes: List[Hero]) -> dict:
     return {hero: len(heroes) - i for i, hero in enumerate(heroes)}
 
-def generate_partial_blank_variants(team: List[str], max_blanks: int = 2) -> List[List[str]]:
+def generate_partial_blank_variants(team: List[Hero], max_blanks: int = 2) -> List[List[Hero]]:
     variants = [team[:]]
     for blanks_count in range(1, max_blanks + 1):
         for blank_positions in combinations(range(len(team)), blanks_count):
@@ -40,7 +39,7 @@ def generate_partial_blank_variants(team: List[str], max_blanks: int = 2) -> Lis
             variants.append(variant)
     return variants
 
-def is_valid_combination(combo: List[List[str]]) -> bool:
+def is_valid_combination(combo: List[List[Hero]]) -> bool:
     used = set()
     for team in combo:
         for hero in team:
@@ -78,7 +77,7 @@ def evaluate_combinations(args):
             local_best_indexes = combo_indexes
     return local_best_score, local_best_combo, local_best_indexes
 
-def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List[List[List[Hero]]], battles: List[Comp]) -> List[List[Hero]]:
+def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List[List[List[Hero]]], priority_order: List[int]) -> List[List[Hero]]:
     global global_ranking
     global_ranking = rank_heroes(my_heroes)
 
@@ -90,6 +89,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
     for battle_num in priority_order:
         battle_idx = battle_num - 1
         battle_comps = recommended_comps_per_battle[battle_idx]
+
         filtered = [
             team for team in battle_comps
             if all(hero == Hero.BLANK or (hero in global_ranking and hero not in used_heroes) for hero in team)
@@ -125,7 +125,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
 
     return assigned_teams
 
-def print_result(assigned_teams: List[List[str]], battles: List[Comp], my_heroes: List[Hero]):
+def print_result(assigned_teams: List[List[Hero]], battles: List[Comp], my_heroes: List[Hero]):
 
     formatted_teams = []
     for i, team in enumerate(assigned_teams, start=1):
@@ -162,25 +162,34 @@ def print_result(assigned_teams: List[List[str]], battles: List[Comp], my_heroes
         else:
             print(f"{label:<{team_name_length}}: {team_str:<{team_comp_length}} -> Score: {score}")
 
-def expand_team(template: List[Union[str, List[str]]]) -> List[List[str]]:
-    expanded_slots = [
-        [slot] if isinstance(slot, str) else slot
-        for slot in template
-    ]
+def expand_team(template: List[Union[str, Hero, List[Union[str, Hero]]]]) -> List[List[Hero]]:
+    expanded_slots = []
+    for slot in template:
+        if isinstance(slot, list):
+            heroes = [Hero[s.name if isinstance(s, Hero) else s.replace('-', '_').replace(' ', '_').replace('.', '')] for s in slot]
+        else:
+            s = slot
+            heroes = [Hero[s.name if isinstance(s, Hero) else s.replace('-', '_').replace(' ', '_').replace('.', '')]]
+        expanded_slots.append(heroes)
     return [list(team) for team in product(*expanded_slots)]
 
-def deduplicate_and_validate_battle_comps(battle_comps: List[List[str]]) -> List[List[str]]:
+def deduplicate_and_validate_battle_comps(battle_comps: List[List[Hero]]) -> List[List[Hero]]:
     seen = set()
     unique = []
     for team in battle_comps:
-        if len(team) != 5:
-            print("\n\n\n BAD TEAM " + str(team) + "\n\n")
-        if len(team) != len(set(team)):
-            continue  # Invalid: duplicate hero in team
-        key = tuple(team)
-        if key not in seen:
-            seen.add(key)
-            unique.append(team)
+        if not isinstance(team, list) or len(team) != 5:
+            print("\n\n\n BAD TEAM " + ', '.join(h.name if isinstance(h, Hero) else str(h) for h in team) + "\n\n")
+            continue
+        try:
+            names = [h.name if isinstance(h, Hero) else str(h) for h in team]
+            if len(names) != len(set(names)):
+                continue
+            key = tuple(names)
+            if key not in seen:
+                seen.add(key)
+                unique.append(team)
+        except TypeError:
+            continue
     return unique
 
 def convert_nested_hero_lists_to_enum(data):
@@ -191,10 +200,9 @@ def convert_nested_hero_lists_to_enum(data):
     elif isinstance(data, Comp):
         return convert_nested_hero_lists_to_enum(data.comps)
     else:
-        # Return the Hero enum value
         return data
 
-def FindBest(battles, my_heroes):
+def FindBest(battles, my_heroes, priority_order):
     initialize()
 
     comps = convert_nested_hero_lists_to_enum(battles)
@@ -208,5 +216,5 @@ def FindBest(battles, my_heroes):
         filtered = deduplicate_and_validate_battle_comps(new_teams)
         expanded_recommended_comps_per_battle.append(filtered)
 
-    best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle, battles)
+    best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle, priority_order)
     print_result(best_set, battles, my_heroes)

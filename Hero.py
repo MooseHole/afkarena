@@ -125,6 +125,7 @@ class Hero(Enum):
     Peggy = auto()
     Pippa = auto()
     Prince_Persia = auto()
+    Pulina = auto()
     Queen = auto()
     Raine = auto()
     Raku = auto()
