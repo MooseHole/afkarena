@@ -1,0 +1,41 @@
+from Utils import convert_nested_hero_lists_to_enum
+import ast
+
+hero_list_raw = '''
+        "Ainz", "Lucretia", "Liberta", "Drez", "Albedo",
+        "Daimon", "Rem", "Arthur", "Merlin", "Elijah-Lailah",
+        "Lucius", "Randle", "Silas", "Shalltear", "Shemira",
+        "Knox", "Bronn", "Shuna", "Lyca", "Rowan",
+        "Grezhul", "Palmer", "Ferael", "Thoran", "Safiya"
+        , "Talene", "Robin-Hood", "Raku", "Kaz", "Satrana",
+        "Nara", "Rimuru", "Numisu", "Prince-Persia", "Belinda",
+        "Gwyneth", "Naroko", "Mortas", "Jerome", "Rosaline",
+        "Eironn", "Athalia", "Scarlet", "Nyla", "Kelthur",
+        "Emilia", "Mishka", "Saurus", "Mulan", "Baden",
+        "Antandra", "Izold", "Misha", "Pippa", "Leonardo",
+        "Lady-Simona", "Joan-Arc", "Treznor", "Khasos", "Brutus",
+        "Cecilia", "Wu-Kong", "Estrilda", "Anasta", "Tasi",
+        "Nemora", "Theowyn", "Kren", "Tidus", "Lorsan",
+        "Laios", "Desira", "Ginneas", "Fawkes", "Edwin",
+        "Oku", "Hodgkin", "Raine", "Skraith", "Rigby",
+        "Vika", "Melusina", "Seirus", "Nevanthi", "Gorvo",
+        "Geralt", "Crassio", "Vurk", "Isabella", "Villanelle",
+        "Salaki", "Warek", "Eorin", "Trishea", "Gorren",
+        "Thali", "Astar", "Fane", "Oden", "Alaro",
+        "Kalene", "Flora", "Solise", "Thesku", "Granit",
+        "Adrian-Elyse", "Ivan", "Marcille", "Tamrus", "Peggy",
+        "Hendrik", "Ulmus", "Thane", "Morrow", "Walker",
+        "Respen", "Torne", "Eluard", "Anoki", "Skreg",
+        "Oscar", "Queen", "Raoul", "Atheus", "Hildwin",
+        "Sonja", "Mira", "AThoran", "AShemira", "Zaphrael",
+        "Eugene", "Velufira", "Melion", "Lavatune", "Aurelia",
+        "Kalthin", "Talene", "Zolrath", "Alna", "Khazard",
+        "Envydiel", "Gavus", "AEzizh", "Kregor", "ASolise",
+        "ABelinda", "Skylan", "Daemia", "DGwyneth", "Maetria",
+        "Canisa-Ruke", "Mezoth", "Mehira", "AThane", "AAthalia",
+        "ABrutus", "Audrae", "Lucilla", "Olgath", "Tarnos",
+        "Zikis", "Framton", "Morael", "Orthros", "Cassius",
+        "Titus", "Vyloris", "Leofric",
+    '''
+hero_list = ast.literal_eval(f"[{hero_list_raw}]")
+my_heroes = convert_nested_hero_lists_to_enum(hero_list)
