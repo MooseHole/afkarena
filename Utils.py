@@ -123,10 +123,10 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
         if best_team is not None:
             used_heroes.update(h for h in best_team if h != Hero.BLANK)
 
-    print("\n=== Priority-Based Team Breakdown ===")
+    formatted_teams = []
     for i, team in enumerate(assigned_teams, start=1):
         if team is None:
-            print(f"{battles[i-1].mode} {battles[i-1].name}: No team assigned.")
+            formatted_teams.append((battles[i].mode, battles[i].name, None, None))
             continue
         score = cached_score_team(tuple(team))
         printable_team = []
@@ -143,7 +143,20 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
                 printable_team.append(f"BLANK({name})")
             else:
                 printable_team.append(name)
-        print(f"{battles[i-1].mode} {battles[i-1].name}: {', '.join(printable_team)} -> Score: {score}")
+        team_str = ', '.join(printable_team)
+        score = cached_score_team(tuple(team))
+        formatted_teams.append((battles[i-1].mode, battles[i-1].name, team_str, score))
+
+    team_name_length = max(len(f"{mode} {name}") for mode, name, team, score in formatted_teams if team is not None)
+    team_comp_length = max(len(team) for mode, name, team, score in formatted_teams if team is not None)
+
+    print("\n=== Priority-Based Team Breakdown ===")
+    for mode, name, team_str, score in formatted_teams:
+        label = f"{mode} {name}"
+        if team_str is None:
+            print(f"{label:<{team_name_length}}: No team assigned.")
+        else:
+            print(f"{label:<{team_name_length}}: {team_str:<{team_comp_length}} -> Score: {score}")
 
     return assigned_teams
 
