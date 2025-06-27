@@ -38,5 +38,5 @@ my_heroes = [
     h.ABrutus, h.ASolise, h.AThane, h.ABelinda, h.Skylan,
     h.Daemia,h.DGwyneth, h.Maetria, h.Canisa_Ruke, h.Mezoth,
     h.Lucilla, h.Mehira, h.Olgath, h.Tarnos, h.Zikis,
-    h.Titus, h.Vyloris, h.Leofric, h.Orthros, h.Veithael
+    h.Titus, h.Vyloris, h.Lysander, h.Leofric, h.Orthros, h.Veithael
     ]
