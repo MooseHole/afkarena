@@ -2,7 +2,7 @@ from Utils import *
 from Comp import *
 from Hero import Hero as h
 
-priority_order = [1, 2, 3] # 1-based
+priority_order = [2, 1, 3] # 1-based
 
 # From https://afk.guide/dragonforge-trials-guide/
 recommended_comps_per_battle = [
@@ -11,7 +11,7 @@ recommended_comps_per_battle = [
         [h.Cassius, h.Pulina, h.ASafiya, h.Melion, h.Lan],
         [h.ASafiya, h.Cassius, h.Numisu, h.Villanelle, h.Lan],
     ] +
-    expand_team([h.Lucilla, [h.AShemira, h.Talene], [h.Silas, h.Liberta], h.DGwyneth]) +
+    expand_team([h.Lucilla, [h.AShemira, h.Talene], [h.Silas, h.Liberta], h.Ivan, h.DGwyneth]) +
     [   [h.Alna, h.Cassius, h.Silas, h.Pulina, h.ASafiya],
         [h.Lucilla, h.AShemira, h.Liberta, h.Ivan, h.DGwyneth],
         [h.Pulina, h.Nyla, h.Cassius, h.ASafiya, h.Emilia],

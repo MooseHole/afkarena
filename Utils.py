@@ -1,11 +1,12 @@
-from itertools import product, combinations, islice
+from itertools import product, combinations
 from functools import lru_cache
 from typing import List, Union
 from Hero import Hero
 from Comp import Comp
+from MyHeroes import my_heroes
 
 # Tune these constants
-POSITION_WEIGHT = 10
+POSITION_WEIGHT = len(my_heroes) / 2
 BLANK_SLOT_PENALTY = 1000
 
 global_ranking = {}
@@ -38,44 +39,6 @@ def generate_partial_blank_variants(team: List[Hero], max_blanks: int = 2) -> Li
                 variant[pos] = Hero.BLANK
             variants.append(variant)
     return variants
-
-def is_valid_combination(combo: List[List[Hero]]) -> bool:
-    used = set()
-    for team in combo:
-        for hero in team:
-            if hero == Hero.BLANK:
-                continue
-            if hero in used:
-                return False
-            used.add(hero)
-    return True
-
-def chunked_iterable(iterable, size):
-    it = iter(iterable)
-    while True:
-        chunk = list(islice(it, size))
-        if not chunk:
-            break
-        yield chunk
-
-def evaluate_combinations(args):
-    combo_indexes_chunk, filtered_comps_per_battle = args
-    local_best_score = float("inf")
-    local_best_combo = None
-    local_best_indexes = None
-    for combo_indexes in combo_indexes_chunk:
-        combo = [filtered_comps_per_battle[b][idx] for b, idx in enumerate(combo_indexes)]
-        if not is_valid_combination(combo):
-            continue
-        score = sum(
-            cached_score_team(tuple(combo[b])) + combo_indexes[b] * POSITION_WEIGHT
-            for b in range(len(combo))
-        )
-        if score < local_best_score:
-            local_best_score = score
-            local_best_combo = combo
-            local_best_indexes = combo_indexes
-    return local_best_score, local_best_combo, local_best_indexes
 
 def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List[List[List[Hero]]], priority_order: List[int]) -> List[List[Hero]]:
     global global_ranking
@@ -111,10 +74,13 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
 
         best_team = None
         best_score = float('-inf')
-        for team in filtered:
+        for idx, team in enumerate(filtered):
             if any(h in used_heroes for h in team if h != Hero.BLANK):
                 continue
-            score = sum(global_ranking.get(hero, -BLANK_SLOT_PENALTY) if hero != Hero.BLANK else -BLANK_SLOT_PENALTY for hero in team)
+
+
+            hero_score = sum(global_ranking.get(hero, -BLANK_SLOT_PENALTY) if hero != Hero.BLANK else -BLANK_SLOT_PENALTY for hero in team)
+            score = hero_score - idx * POSITION_WEIGHT
             if score > best_score:
                 best_score = score
                 best_team = team
