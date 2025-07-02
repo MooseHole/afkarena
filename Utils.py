@@ -44,7 +44,6 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
     global global_ranking
     global_ranking = rank_heroes(my_heroes)
 
-    print(f"Battle priorities: {priority_order}")
     num_battles = len(recommended_comps_per_battle)
     assigned_teams = [None] * num_battles
     used_heroes = set()
@@ -60,7 +59,6 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
         ]
 
         if not filtered:
-            print(f"Battle {battle_num} has no valid teams. Adding fallback (BLANK) teams.")
             blank_variants = []
             for team in battle_comps:
                 try:
@@ -91,7 +89,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
 
     return assigned_teams
 
-def print_result(assigned_teams: List[List[Hero]], battles: List[Comp], my_heroes: List[Hero]):
+def print_result(assigned_teams: List[List[Hero]], battles: List[Comp], my_heroes: List[Hero], priority_order: List[int]):
 
     formatted_teams = []
     for i, team in enumerate(assigned_teams, start=1):
@@ -117,12 +115,13 @@ def print_result(assigned_teams: List[List[Hero]], battles: List[Comp], my_heroe
         score = cached_score_team(tuple(team))
         formatted_teams.append((battles[i-1].mode, battles[i-1].name, team_str, score))
 
-    team_name_length = max(len(f"{mode} {name}") for mode, name, team, score in formatted_teams if team is not None)
+    team_name_length = max(len(f"{name}") for mode, name, team, score in formatted_teams if team is not None)
     team_comp_length = max(len(team) for mode, name, team, score in formatted_teams if team is not None)
 
-    print("\n=== Priority-Based Team Breakdown ===")
+    print(f"\n=== {formatted_teams[0][0]} ===")
+    print(f"Battle priorities: {priority_order}")
     for mode, name, team_str, score in formatted_teams:
-        label = f"{mode} {name}"
+        label = f"{name}"
         if team_str is None:
             print(f"{label:<{team_name_length}}: No team assigned.")
         else:
@@ -177,10 +176,10 @@ def FindBest(battles, my_heroes, priority_order):
     for battle_teams in comps:
         new_teams = []
         for team in battle_teams:
-            partial_variants = generate_partial_blank_variants(team, max_blanks=1)
+            partial_variants = generate_partial_blank_variants(team, max_blanks=0)
             new_teams.extend(partial_variants)
         filtered = deduplicate_and_validate_battle_comps(new_teams)
         expanded_recommended_comps_per_battle.append(filtered)
 
     best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle, priority_order)
-    print_result(best_set, battles, my_heroes)
+    print_result(best_set, battles, my_heroes, priority_order)

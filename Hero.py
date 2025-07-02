@@ -2,6 +2,7 @@ from enum import Enum, auto
 
 class Hero(Enum):
     AAthalia = auto()
+    ABaden = auto()
     ABelinda = auto()
     ABrutus = auto()
     AEironn = auto()
@@ -52,6 +53,7 @@ class Hero(Enum):
     Estrilda = auto()
     Eugene = auto()
     Ezio = auto()
+    Ezizh = auto()
     Fane = auto()
     Fawkes = auto()
     Ferael = auto()

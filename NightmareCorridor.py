@@ -1,7 +1,7 @@
 from Utils import *
 from Comp import *
 
-priority_order = [5, 2, 1, 4, 6, 3] # 1-based
+priority_order = [2, 5, 1, 4, 6, 3] # 1-based
 
 # From https://afk.guide/nightmare-corridor-guide-teams/
 recommended_comps_per_battle = [
