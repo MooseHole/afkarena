@@ -131,10 +131,9 @@ def expand_team(template: List[Union[str, Hero, List[Union[str, Hero]]]]) -> Lis
     expanded_slots = []
     for slot in template:
         if isinstance(slot, list):
-            heroes = [Hero[s.name if isinstance(s, Hero) else s.replace('-', '_').replace(' ', '_').replace('.', '')] for s in slot]
+            heroes = [Hero[s.name] for s in slot]
         else:
-            s = slot
-            heroes = [Hero[s.name if isinstance(s, Hero) else s.replace('-', '_').replace(' ', '_').replace('.', '')]]
+            heroes = [Hero[slot.name]]
         expanded_slots.append(heroes)
     return [list(team) for team in product(*expanded_slots)]
 

@@ -1,81 +1,82 @@
 from Utils import *
 from Comp import *
+from Hero import Hero as h
 
 priority_order = [2, 5, 1, 4, 6, 3] # 1-based
 
 # From https://afk.guide/nightmare-corridor-guide-teams/
 recommended_comps_per_battle = [
     # Battle 1 – Astral Devourer
-    expand_team(["Zohra", ["Melion", "Atheus", "Randle", "Lucilla", "Raine", "Mortas"], "Ivan", "Envydiel", ["Daemia", "ASafiya"]]) +
-    expand_team([["Zohra", "Lucilla", "Rimuru", "Skylan", "Melion", "Knox"], "Sion", "Daemia", "Palmer", "Ivan"]) +
-    expand_team(["Zohra", "Envydiel", "Ivan", ["Mortas", "Palmer", "Elijah-Lailah"], "Daemia"]) +
-    expand_team(["Knox", "Rimuru", "Daemia", ["Palmer", "Liberta"], "ALyca"]) +
-    [["Liberta", "ALyca", "Elijah-Lailah", "Rimuru", "Daemia"]] +
-    expand_team([["ALyca", "ALucius"], "Knox", "Daemia", "Palmer", "Ivan"]) +
-    expand_team(["Daemia", ["Lucilla", "Knox"], ["Liberta", "Palmer", "Lavatune"], "AAthalia", "Rimuru"]) +
-    expand_team([["Palmer", "Lucilla"], "Zohra", ["Liberta", "Jerome", "Lucilla", "Ivan"], "Daemia", ["Knox", "AThoran"]]) +
-    [   ["Lucilla", "Liberta", "Daemia", "Zohra", "Lady-Simona"],
-        ["Daemia", "Skylan", "Liberta", "Lucilla", "Rimuru"],
-        ["Skylan", "Lucilla", "Daemia", "Zohra", "ALyca"],
-        ["Crassio", "Palmer", "Daemia", "Rimuru", "Lucilla"],
-        ["Knox", "Lavatune", "Daemia", "Palmer", "Haelia"],
-        ["AThoran", "Rimuru", "Liberta", "Daemia", "AShemira"],
+    expand_team([h.Zohra, [h.Melion, h.Atheus, h.Randle, h.Lucilla, h.Raine, h.Mortas], h.Ivan, h.Envydiel, [h.Daemia, h.ASafiya]]) +
+    expand_team([[h.Zohra, h.Lucilla, h.Rimuru, h.Skylan, h.Melion, h.Knox], h.Sion, h.Daemia, h.Palmer, h.Ivan]) +
+    expand_team([h.Zohra, h.Envydiel, h.Ivan, [h.Mortas, h.Palmer, h.Elijah_Lailah], h.Daemia]) +
+    expand_team([h.Knox, h.Rimuru, h.Daemia, [h.Palmer, h.Liberta], h.ALyca]) +
+    [[h.Liberta, h.ALyca, h.Elijah_Lailah, h.Rimuru, h.Daemia]] +
+    expand_team([[h.ALyca, h.ALucius], h.Knox, h.Daemia, h.Palmer, h.Ivan]) +
+    expand_team([h.Daemia, [h.Lucilla, h.Knox], [h.Liberta, h.Palmer, h.Lavatune], h.AAthalia, h.Rimuru]) +
+    expand_team([[h.Palmer, h.Lucilla], h.Zohra, [h.Liberta, h.Jerome, h.Lucilla, h.Ivan], h.Daemia, [h.Knox, h.AThoran]]) +
+    [   [h.Lucilla, h.Liberta, h.Daemia, h.Zohra, h.Lady_Simona],
+        [h.Daemia, h.Skylan, h.Liberta, h.Lucilla, h.Rimuru],
+        [h.Skylan, h.Lucilla, h.Daemia, h.Zohra, h.ALyca],
+        [h.Crassio, h.Palmer, h.Daemia, h.Rimuru, h.Lucilla],
+        [h.Knox, h.Lavatune, h.Daemia, h.Palmer, h.Haelia],
+        [h.AThoran, h.Rimuru, h.Liberta, h.Daemia, h.AShemira],
     ],
 
     # Battle 2 – Fractured Fool
-    expand_team(["Orthros", "Liberta", "Lucilla", "Knox", ["Haelia", "Shuna", "Rosaline", "Gavus", "Veithael"]]) +
-    [   ["Orthros", "Jerome", "Knox", "Liberta", "Lucilla"],
-        ["Shuna", "Knox", "Liberta", "Lysander", "Orthros"],
-        ["AAthalia", "AThoran", "ASafiya", "Lucilla", "Lysander"],
-        ["AThane", "Lan", "Haelia", "Veithael", "Aurelia"],
-        ["Warek", "Lan", "AThane", "Veithael", "Aurelia"],] +
-    expand_team([["Lan", "Lavatune"], "Jerome", ["Raine", "Lorsan", "AThoran", "Veithael"], ["Vika", "AThane"], "Rosaline"]) +
-    [   ["Lavatune", "Rosaline", "Lorsan", "Vika", "Lady-Simona"],
-        ["Vika", "Lucilla", "Rimuru", "Lavatune", "Liberta"],
-        ["Vika", "Lavatune", "Rosaline", "Anasta", "Raoul"],] +
-    expand_team(["Rem", "ASolise", "Randle", ["Misha", "AThoran"], ["Naroko", "Numisu", "AThoran"]]) +
-    expand_team(["Trishea", "Baden", "Elijah-Lailah", ["Villanelle", "Hodgkin"], "Aurelia"]) +
-    [   ["Jerome", "Lavatune", "Raine", "ABelinda", "Rosaline"],
-        ["ABelinda", "Liberta", "Raine", "Lavatune", "Knox"],
-        ["Naroko", "Lucilla", "Knox", "Liberta", "Ivan"],
-        ["Sion", "Lyca", "ASafiya", "Villanelle", "Naroko"], ],
+    expand_team([h.Orthros, h.Liberta, h.Lucilla, h.Knox, [h.Haelia, h.Shuna, h.Rosaline, h.Gavus, h.Veithael]]) +
+    [   [h.Orthros, h.Jerome, h.Knox, h.Liberta, h.Lucilla],
+        [h.Shuna, h.Knox, h.Liberta, h.Lysander, h.Orthros],
+        [h.AAthalia, h.AThoran, h.ASafiya, h.Lucilla, h.Lysander],
+        [h.AThane, h.Lan, h.Haelia, h.Veithael, h.Aurelia],
+        [h.Warek, h.Lan, h.AThane, h.Veithael, h.Aurelia],] +
+    expand_team([[h.Lan, h.Lavatune], h.Jerome, [h.Raine, h.Lorsan, h.AThoran, h.Veithael], [h.Vika, h.AThane], h.Rosaline]) +
+    [   [h.Lavatune, h.Rosaline, h.Lorsan, h.Vika, h.Lady_Simona],
+        [h.Vika, h.Lucilla, h.Rimuru, h.Lavatune, h.Liberta],
+        [h.Vika, h.Lavatune, h.Rosaline, h.Anasta, h.Raoul],] +
+    expand_team([h.Rem, h.ASolise, h.Randle, [h.Misha, h.AThoran], [h.Naroko, h.Numisu, h.AThoran]]) +
+    expand_team([h.Trishea, h.Baden, h.Elijah_Lailah, [h.Villanelle, h.Hodgkin], h.Aurelia]) +
+    [   [h.Jerome, h.Lavatune, h.Raine, h.ABelinda, h.Rosaline],
+        [h.ABelinda, h.Liberta, h.Raine, h.Lavatune, h.Knox],
+        [h.Naroko, h.Lucilla, h.Knox, h.Liberta, h.Ivan],
+        [h.Sion, h.Lyca, h.ASafiya, h.Villanelle, h.Naroko], ],
 
     # Battle 3 – Abyssal Murmur
-    expand_team([["Randle", "Adrian-Elyse", "Lan"], ["Hodgkin", "Melion", "Lavatune"], "Rimuru", "Sion", "Misha"]) +
-    expand_team([["Envydiel", "Zohra"], ["Randle", "AThoran", "Raine"], ["Hodgkin", "Palmer", "Velufira"], ["Misha", "Saurus", "Lavatune", "Knox"], ["Rimuru", "Raine", "Jerome", "Estrilda", "Saurus", "Silas"]]) +
-    [   ["Melion", "Lavatune", "Rosaline", "Haelia", "Rimuru"],
-        ["Lan", "AThane", "AEstrilda", "Jerome", "Raine"],] +
-    expand_team(["Trishea", "Baden", "Elijah-Lailah", ["Knox", "Nevanthi", "Naroko", "Lavatune", "AThoran"], ["Aurelia", "Nevanthi"]]) +
-    expand_team(["Rem", "ASolise", ["Naroko", "Numisu", "AThoran"], "Misha", "Randle"]) +
-    expand_team(["AEironn", "Randle", "Misha", ["Knox", "Rimuru"], "Hodgkin"]),
+    expand_team([[h.Randle, h.Adrian_Elyse, h.Lan], [h.Hodgkin, h.Melion, h.Lavatune], h.Rimuru, h.Sion, h.Misha]) +
+    expand_team([[h.Envydiel, h.Zohra], [h.Randle, h.AThoran, h.Raine], [h.Hodgkin, h.Palmer, h.Velufira], [h.Misha, h.Saurus, h.Lavatune, h.Knox], [h.Rimuru, h.Raine, h.Jerome, h.Estrilda, h.Saurus, h.Silas]]) +
+    [   [h.Melion, h.Lavatune, h.Rosaline, h.Haelia, h.Rimuru],
+        [h.Lan, h.AThane, h.AEstrilda, h.Jerome, h.Raine],] +
+    expand_team([h.Trishea, h.Baden, h.Elijah_Lailah, [h.Knox, h.Nevanthi, h.Naroko, h.Lavatune, h.AThoran], [h.Aurelia, h.Nevanthi]]) +
+    expand_team([h.Rem, h.ASolise, [h.Naroko, h.Numisu, h.AThoran], h.Misha, h.Randle]) +
+    expand_team([h.AEironn, h.Randle, h.Misha, [h.Knox, h.Rimuru], h.Hodgkin]),
 
     # Battle 4 - Clawlossus
-    expand_team(["Jerome", ["Lavatune", "Lan"], "Raine", ["Marcille", "DGwyneth"], "Rosaline"]) +
-    expand_team(["Marcille", ["Aurelia", "Velufira"], ["Silas", "Elijah-Lailah"], "Lavatune", ["Laios", "Randle", "Velufira"]]) +
-    expand_team(["Aurelia", "Lavatune", ["Rosaline", "Raine"], "Marcille", "Velufira"]) +
-    [   ["Randle", "AThoran", "Velufira", "Lysander", "DGwyneth"],
-        ["AThoran", "AAthalia", "Randle", "Lysander", "Velufira"],
-        ["Sion", "Velufira", "Rimuru", "Misha", "Randle"],
-        ["Randle", "ABelinda", "Jerome", "Lavatune", "Rosaline"],
-        ["Envydiel", "Jerome", "Raine", "Velufira", "Lan"],] +
-    expand_team(["Envydiel", "Raine", "Velufira", ["Atheus", "Lan"], ["Rimuru", "Silas"]]) +
-    [   ["Envydiel", "Randle", "Rimuru", "Misha", "Hodgkin"],] +
-    expand_team(["Trishea", "Baden", "Aurelia", ["Lavatune", "Knox", "Liberta", "Hodgkin"], "Elijah-Lailah"]),
+    expand_team([h.Jerome, [h.Lavatune, h.Lan], h.Raine, [h.Marcille, h.DGwyneth], h.Rosaline]) +
+    expand_team([h.Marcille, [h.Aurelia, h.Velufira], [h.Silas, h.Elijah_Lailah], h.Lavatune, [h.Laios, h.Randle, h.Velufira]]) +
+    expand_team([h.Aurelia, h.Lavatune, [h.Rosaline, h.Raine], h.Marcille, h.Velufira]) +
+    [   [h.Randle, h.AThoran, h.Velufira, h.Lysander, h.DGwyneth],
+        [h.AThoran, h.AAthalia, h.Randle, h.Lysander, h.Velufira],
+        [h.Sion, h.Velufira, h.Rimuru, h.Misha, h.Randle],
+        [h.Randle, h.ABelinda, h.Jerome, h.Lavatune, h.Rosaline],
+        [h.Envydiel, h.Jerome, h.Raine, h.Velufira, h.Lan],] +
+    expand_team([h.Envydiel, h.Raine, h.Velufira, [h.Atheus, h.Lan], [h.Rimuru, h.Silas]]) +
+    [   [h.Envydiel, h.Randle, h.Rimuru, h.Misha, h.Hodgkin],] +
+    expand_team([h.Trishea, h.Baden, h.Aurelia, [h.Lavatune, h.Knox, h.Liberta, h.Hodgkin], h.Elijah_Lailah]),
 
     # Battle 5 - Sky Serpent
-    expand_team(["Orthros", ["Laios", "Velufira", "Lucilla", "ASolise", "Leviathan", "Kregor"], ["Knox", "Velufira"], "Palmer", "Liberta"]) +
-    [   ["Randle", "Misha", "Silas", "ASolise", "Hodgkin"],] +
-    expand_team([["ALyca", "Rimuru", "Envydiel"], "Randle", ["Silas", "Rimuru", "Ivan"], "Misha", "Hodgkin"]) +
-    [   ["Jerome", "Randle", "ALyca", "Misha", "ASolise"],
-        ["Jerome", "Sion", "Villanelle", "Shuna", "Knox"],],
+    expand_team([h.Orthros, [h.Laios, h.Velufira, h.Lucilla, h.ASolise, h.Leviathan, h.Kregor], [h.Knox, h.Velufira], h.Palmer, h.Liberta]) +
+    [   [h.Randle, h.Misha, h.Silas, h.ASolise, h.Hodgkin],] +
+    expand_team([[h.ALyca, h.Rimuru, h.Envydiel], h.Randle, [h.Silas, h.Rimuru, h.Ivan], h.Misha, h.Hodgkin]) +
+    [   [h.Jerome, h.Randle, h.ALyca, h.Misha, h.ASolise],
+        [h.Jerome, h.Sion, h.Villanelle, h.Shuna, h.Knox],],
         
     # Battle 6 - Nightmare Weaver
-    expand_team([["Leviathan", "Adrian-Elyse", "AEstrilda", "Lan"], ["Misha", "Lan"], "Rimuru", "Sion", ["Melion", "Lan"]]) +
-    [   ["ALyca", "Melion", "Misha", "Sion", "Rimuru"],] +
-    expand_team(["Envydiel", "AThoran", "Lan", ["Melion", "Velufira"], "Laios"]) +
-    [   ["AThoran", "Sion", "Lan", "Laios", "Shuna"],
-        ["Lan", "Bronn", "Sion", "Palmer", "Melion"],
-        ["Envydiel", "Laios", "Raine", "Lysander", "Lan"],],
+    expand_team([[h.Leviathan, h.Adrian_Elyse, h.AEstrilda, h.Lan], [h.Misha, h.Lan], h.Rimuru, h.Sion, [h.Melion, h.Lan]]) +
+    [   [h.ALyca, h.Melion, h.Misha, h.Sion, h.Rimuru],] +
+    expand_team([h.Envydiel, h.AThoran, h.Lan, [h.Melion, h.Velufira], h.Laios]) +
+    [   [h.AThoran, h.Sion, h.Lan, h.Laios, h.Shuna],
+        [h.Lan, h.Bronn, h.Sion, h.Palmer, h.Melion],
+        [h.Envydiel, h.Laios, h.Raine, h.Lysander, h.Lan],],
 ]
 
 # Deduplicate and validate
