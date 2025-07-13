@@ -6,29 +6,23 @@ from Comp import Comp
 from MyHeroes import my_heroes
 
 # Tune these constants
-POSITION_WEIGHT = len(my_heroes) / 2
-BLANK_SLOT_PENALTY = 1000
+POSITION_WEIGHT = 1 # len(my_heroes) / 2
+BLANK_SLOT_PENALTY = 10000
 
-global_ranking = {}
 
 def initialize():
-    global global_ranking
-    global_ranking = {}
+    pass
 
 @lru_cache(maxsize=None)
 def cached_score_team(team_tuple):
-    global global_ranking
     team = list(team_tuple)
     score = 0
     for hero in team:
         if hero == Hero.BLANK:
             score -= BLANK_SLOT_PENALTY
         else:
-            score += global_ranking.get(hero, -BLANK_SLOT_PENALTY)
+            score += my_heroes.get(hero, -BLANK_SLOT_PENALTY)
     return score
-
-def rank_heroes(heroes: List[Hero]) -> dict:
-    return {hero: len(heroes) - i for i, hero in enumerate(heroes)}
 
 def generate_partial_blank_variants(team: List[Hero], max_blanks: int = 2) -> List[List[Hero]]:
     variants = [team[:]]
@@ -40,10 +34,7 @@ def generate_partial_blank_variants(team: List[Hero], max_blanks: int = 2) -> Li
             variants.append(variant)
     return variants
 
-def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List[List[List[Hero]]], priority_order: List[int]) -> List[List[Hero]]:
-    global global_ranking
-    global_ranking = rank_heroes(my_heroes)
-
+def find_best_team_set(recommended_comps_per_battle: List[List[List[Hero]]], priority_order: List[int]) -> List[List[Hero]]:
     num_battles = len(recommended_comps_per_battle)
     assigned_teams = [None] * num_battles
     used_heroes = set()
@@ -54,7 +45,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
 
         filtered = [
             team for team in battle_comps
-            if all(hero == Hero.BLANK or (hero in global_ranking and hero not in used_heroes) for hero in team)
+            if all(hero == Hero.BLANK or (hero in my_heroes and hero not in used_heroes) for hero in team)
             and len(set(hero for hero in team if hero != Hero.BLANK)) == len([hero for hero in team if hero != Hero.BLANK])
         ]
 
@@ -77,7 +68,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
                 continue
 
 
-            hero_score = sum(global_ranking.get(hero, -BLANK_SLOT_PENALTY) if hero != Hero.BLANK else -BLANK_SLOT_PENALTY for hero in team)
+            hero_score = sum(my_heroes.get(hero, -BLANK_SLOT_PENALTY) if hero != Hero.BLANK else -BLANK_SLOT_PENALTY for hero in team)
             score = hero_score - idx * POSITION_WEIGHT
             if score > best_score:
                 best_score = score
@@ -89,7 +80,7 @@ def find_best_team_set(my_heroes: List[Hero], recommended_comps_per_battle: List
 
     return assigned_teams
 
-def print_result(assigned_teams: List[List[Hero]], battles: List[Comp], my_heroes: List[Hero], priority_order: List[int]):
+def print_result(assigned_teams: List[List[Hero]], battles: List[Comp], priority_order: List[int]):
 
     formatted_teams = []
     for i, team in enumerate(assigned_teams, start=1):
@@ -166,7 +157,7 @@ def convert_nested_hero_lists_to_enum(data):
     else:
         return data
 
-def FindBest(battles, my_heroes, priority_order):
+def FindBest(battles, priority_order):
     initialize()
 
     comps = convert_nested_hero_lists_to_enum(battles)
@@ -180,5 +171,5 @@ def FindBest(battles, my_heroes, priority_order):
         filtered = deduplicate_and_validate_battle_comps(new_teams)
         expanded_recommended_comps_per_battle.append(filtered)
 
-    best_set = find_best_team_set(my_heroes, expanded_recommended_comps_per_battle, priority_order)
-    print_result(best_set, battles, my_heroes, priority_order)
+    best_set = find_best_team_set(expanded_recommended_comps_per_battle, priority_order)
+    print_result(best_set, battles, priority_order)

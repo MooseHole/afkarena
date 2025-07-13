@@ -2,7 +2,7 @@ from Utils import *
 from Comp import *
 from Hero import Hero as h
 
-priority_order = [2, 1, 3] # 1-based
+priority_order = [1, 2, 3] # 1-based
 
 # From https://afk.guide/dragonforge-trials-guide/
 recommended_comps_per_battle = [
