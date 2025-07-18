@@ -2,11 +2,11 @@ from Utils import *
 from Comp import *
 from Hero import Hero as h
 
-priority_order = [3, 4, 5, 6, 1, 2] # 1-based
+priority_order = [1, 2, 3, 4, 5, 6] # 1-based
 
 # From https://afk.guide/nightmare-corridor-guide-teams/
 recommended_comps_per_battle = [
-    # Battle 1 – Astral Devourer
+    # Astral Devourer
     expand_team([h.Zohra, [h.Melion, h.Atheus, h.Randle, h.Lucilla, h.Raine, h.Mortas], h.Ivan, h.Envydiel, [h.Daemia, h.ASafiya]]) +
     expand_team([[h.Zohra, h.Lucilla, h.Rimuru, h.Skylan, h.Melion, h.Knox], h.Sion, h.Daemia, h.Palmer, h.Ivan]) +
     expand_team([h.Zohra, h.Envydiel, h.Ivan, [h.Mortas, h.Palmer, h.Elijah_Lailah], h.Daemia]) +
@@ -23,7 +23,7 @@ recommended_comps_per_battle = [
         [h.AThoran, h.Rimuru, h.Liberta, h.Daemia, h.AShemira],
     ],
 
-    # Battle 2 – Fractured Fool
+    # Fractured Fool
     expand_team([h.Orthros, h.Liberta, h.Lucilla, h.Knox, [h.Haelia, h.Shuna, h.Rosaline, h.Gavus, h.Veithael]]) +
     [   [h.Orthros, h.Jerome, h.Knox, h.Liberta, h.Lucilla],
         [h.Shuna, h.Knox, h.Liberta, h.Lysander, h.Orthros],
@@ -41,7 +41,7 @@ recommended_comps_per_battle = [
         [h.Naroko, h.Lucilla, h.Knox, h.Liberta, h.Ivan],
         [h.Sion, h.Lyca, h.ASafiya, h.Villanelle, h.Naroko], ],
 
-    # Battle 3 – Abyssal Murmur
+    # Abyssal Murmur
     expand_team([[h.Randle, h.Adrian_Elyse, h.Lan], [h.Hodgkin, h.Melion, h.Lavatune], h.Rimuru, h.Sion, h.Misha]) +
     expand_team([[h.Envydiel, h.Zohra], [h.Randle, h.AThoran, h.Raine], [h.Hodgkin, h.Palmer, h.Velufira], [h.Misha, h.Saurus, h.Lavatune, h.Knox], [h.Rimuru, h.Raine, h.Jerome, h.Estrilda, h.Saurus, h.Silas]]) +
     [   [h.Melion, h.Lavatune, h.Rosaline, h.Haelia, h.Rimuru],
@@ -50,7 +50,7 @@ recommended_comps_per_battle = [
     expand_team([h.Rem, h.ASolise, [h.Naroko, h.Numisu, h.AThoran], h.Misha, h.Randle]) +
     expand_team([h.AEironn, h.Randle, h.Misha, [h.Knox, h.Rimuru], h.Hodgkin]),
 
-    # Battle 4 - Clawlossus
+    # Clawlossus
     expand_team([h.Jerome, [h.Lavatune, h.Lan], h.Raine, [h.Marcille, h.DGwyneth], h.Rosaline]) +
     expand_team([h.Marcille, [h.Aurelia, h.Velufira], [h.Silas, h.Elijah_Lailah], h.Lavatune, [h.Laios, h.Randle, h.Velufira]]) +
     expand_team([h.Aurelia, h.Lavatune, [h.Rosaline, h.Raine], h.Marcille, h.Velufira]) +
@@ -63,20 +63,23 @@ recommended_comps_per_battle = [
     [   [h.Envydiel, h.Randle, h.Rimuru, h.Misha, h.Hodgkin],] +
     expand_team([h.Trishea, h.Baden, h.Aurelia, [h.Lavatune, h.Knox, h.Liberta, h.Hodgkin], h.Elijah_Lailah]),
 
-    # Battle 5 - Sky Serpent
+    # Sky Serpent
     expand_team([h.Orthros, [h.Laios, h.Velufira, h.Lucilla, h.ASolise, h.Leviathan, h.Kregor], [h.Knox, h.Velufira], h.Palmer, h.Liberta]) +
     [   [h.Randle, h.Misha, h.Silas, h.ASolise, h.Hodgkin],] +
     expand_team([[h.ALyca, h.Rimuru, h.Envydiel], h.Randle, [h.Silas, h.Rimuru, h.Ivan], h.Misha, h.Hodgkin]) +
     [   [h.Jerome, h.Randle, h.ALyca, h.Misha, h.ASolise],
         [h.Jerome, h.Sion, h.Villanelle, h.Shuna, h.Knox],],
         
-    # Battle 6 - Nightmare Weaver
+    # Nightmare Weaver
     expand_team([[h.Leviathan, h.Adrian_Elyse, h.AEstrilda, h.Lan], [h.Misha, h.Lan], h.Rimuru, h.Sion, [h.Melion, h.Lan]]) +
     [   [h.ALyca, h.Melion, h.Misha, h.Sion, h.Rimuru],] +
     expand_team([h.Envydiel, h.AThoran, h.Lan, [h.Melion, h.Velufira], h.Laios]) +
     [   [h.AThoran, h.Sion, h.Lan, h.Laios, h.Shuna],
         [h.Lan, h.Bronn, h.Sion, h.Palmer, h.Melion],
         [h.Envydiel, h.Laios, h.Raine, h.Lysander, h.Lan],],
+    
+    # Marsha
+    expand_team([h.Aurelia, h.Misha, [h.Rimuru, h.Elijah_Lailah], h.Randle, [h.Elijah_Lailah, h.ALyca, h.Velufira]]),
 ]
 
 # Deduplicate and validate
@@ -86,9 +89,10 @@ recommended_comps_per_battle = [
 ]
 
 thisMode = "Nightmare Corridor"
-battles = [ Comp(thisMode, "Battle 1 - Astral Devourer", recommended_comps_per_battle[0]),
-            Comp(thisMode, "Battle 2 - Fractured Fool", recommended_comps_per_battle[1]),
-            Comp(thisMode, "Battle 3 - Abyssal Murmur", recommended_comps_per_battle[2]),
-            Comp(thisMode, "Battle 4 - Clawlossus", recommended_comps_per_battle[3]),
-            Comp(thisMode, "Battle 5 - Sky Serpent", recommended_comps_per_battle[4]),
-            Comp(thisMode, "Battle 6 - Nightmare Weaver", recommended_comps_per_battle[5]) ]
+battles = [ Comp(thisMode, "Battle 1 - Fractured Fool", recommended_comps_per_battle[1]),
+            Comp(thisMode, "Battle 2 - Abyssal Murmur", recommended_comps_per_battle[2]),
+            Comp(thisMode, "Battle 3 - Clawlossus", recommended_comps_per_battle[3]),
+            Comp(thisMode, "Battle 4 - Sky Serpent", recommended_comps_per_battle[4]),
+            Comp(thisMode, "Battle 5 - Nightmare Weaver", recommended_comps_per_battle[5]),
+            Comp(thisMode, "Battle 6 - Marsha", recommended_comps_per_battle[6]),
+          ]
