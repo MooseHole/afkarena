@@ -1,6 +1,6 @@
 from Hero import Hero as h
 
-# My heroes sorted by CMBR July 9, 2025
+# My heroes sorted by CMBR July 17, 2025
 # Should ACQUIRE Zohra
 my_heroes = {
     h.Ainz: 3219, h.Lucretia: 3181, h.Drez: 3121, h.Albedo: 3060, h.Liberta: 3018,
