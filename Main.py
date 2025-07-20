@@ -1,10 +1,9 @@
 from Utils import FindBest
-from NightmareCorridor import battles as nightmareCorridorBattles
-from NightmareCorridor import priority_order as NCp
-from DragonForge9 import battles as DF9Battles, priority_order as DF9p
-from TemporalRift import battles as TRBattles, priority_order as TRp
+from NightmareCorridor import comp_list as compListNC
+from DragonForge9 import comp_list as compListDF9
+from TemporalRift import comp_list as compListTR
 
 if __name__ == "__main__":
-    FindBest(nightmareCorridorBattles, NCp)
-    FindBest(DF9Battles, DF9p)
-    FindBest(TRBattles, TRp)
+    FindBest(compListNC)
+    FindBest(compListDF9)
+    FindBest(compListTR)

@@ -2,7 +2,7 @@ from itertools import product, combinations
 from functools import lru_cache
 from typing import List, Union
 from Hero import Hero
-from Comp import Comp
+from Comp import *
 from MyHeroes import my_heroes
 
 # Tune these constants
@@ -157,10 +157,10 @@ def convert_nested_hero_lists_to_enum(data):
     else:
         return data
 
-def FindBest(battles, priority_order):
+def FindBest(comp_list: CompList):
     initialize()
 
-    comps = convert_nested_hero_lists_to_enum(battles)
+    comps = convert_nested_hero_lists_to_enum(comp_list.battles)
 
     expanded_recommended_comps_per_battle = []
     for battle_teams in comps:
@@ -171,5 +171,5 @@ def FindBest(battles, priority_order):
         filtered = deduplicate_and_validate_battle_comps(new_teams)
         expanded_recommended_comps_per_battle.append(filtered)
 
-    best_set = find_best_team_set(expanded_recommended_comps_per_battle, priority_order)
-    print_result(best_set, battles, priority_order)
+    best_set = find_best_team_set(expanded_recommended_comps_per_battle, comp_list.priority_order)
+    print_result(best_set, comp_list.battles, comp_list.priority_order)

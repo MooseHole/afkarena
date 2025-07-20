@@ -56,3 +56,5 @@ battles = [ Comp(thisMode, "Battle 1", recommended_comps_per_battle[0]),
             Comp(thisMode, "Battle 2", recommended_comps_per_battle[1]),
             Comp(thisMode, "Battle 3", recommended_comps_per_battle[2]),
           ]
+
+comp_list = CompList(battles, priority_order)
