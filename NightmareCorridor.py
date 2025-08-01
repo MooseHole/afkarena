@@ -2,7 +2,7 @@ from Utils import *
 from Comp import *
 from SingleEnemies import SingleEnemyComps
 
-priority_order = [6, 4, 1, 2, 3, 5] # 1-based
+priority_order = [3, 6, 4, 1, 2, 5] # 1-based
 
 thisMode = "Nightmare Corridor"
 enemy_names = ["Fractured Fool", "Abyssal Murmur", "Clawlossus",

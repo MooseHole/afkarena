@@ -21,6 +21,7 @@ class Hero(Enum):
     Alaro = auto()
     Albedo = auto()
     Alna = auto()
+    Alvida = auto()
     Anasta = auto()
     Anoki = auto()
     Antandra = auto()

@@ -2,7 +2,7 @@ from Utils import *
 from Comp import *
 from Hero import Hero as h
 
-priority_order = [1, 2, 3, 4] # 1-based
+priority_order = [1, 2, 3, 4, 5] # 1-based
 
 # From https://afk.guide/temporal-rift/
 recommended_comps_per_battle = [
@@ -34,6 +34,7 @@ battles = [ Comp(thisMode, "1", recommended_comps_per_battle[0]),
             Comp(thisMode, "2", recommended_comps_per_battle[0]),
             Comp(thisMode, "3", recommended_comps_per_battle[0]),
             Comp(thisMode, "4", recommended_comps_per_battle[0]),
+            Comp(thisMode, "5", recommended_comps_per_battle[0]),
           ]
 
 comp_list = CompList(battles, priority_order)

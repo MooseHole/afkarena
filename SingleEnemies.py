@@ -79,13 +79,13 @@ SingleEnemyComps = {
         expand_team([h.Aurelia, h.Misha, [h.Rimuru, h.Elijah_Lailah], h.Randle, [h.Elijah_Lailah, h.ALyca, h.Velufira]]),
     ),
     "Kane": deduplicate_and_validate_battle_comps(
-        [[h.Envydiel, h.Grezhul, h.Elijah_Lailah, h.Lysander, h.Queen]],
+        [[h.Envydiel, h.Grezhul, h.Elijah_Lailah, h.Lysander, h.Queen],
         expand_team([h.Grezhul, h.Envydiel, [h.Kalene, h.Queen, h.Oden], [h.Elijah_Lailah, h.Queen], [h.Queen, h.Tamrus, h.Elijah_Lailah]]),
         expand_team([[h.Oden, h.Envydiel, h.AShemira, h.Hildwin, h.Oden, h.Naroko], [h.Envydiel, h.Naroko, h.Tamrus, h.AShemira, h.ABaden], [h.Mortas, h.Adrian_Elyse, h.Sion, h.Daemia], [h.Kren, h.Oden, h.Lavatune, h.Elijah_Lailah], [h.Elijah_Lailah, h.Daemia, h.Sion, h.Oden]]),
         expand_team([[h.Palmer, h.Envydiel], [h.AShemira, h.Melion], [h.Lavatune, h.Queen], [h.Envydiel, h.DGwyneth, h.Palmer, h.Sion, h.ABelinda], [h.Daemia, h.Elijah_Lailah]]),
         expand_team([[h.Lysander, h.Skylan, h.Velufira, h.Envydiel, h.Ivan, h.Melion, h.Rem], [h.Velufira, h.Zolrath, h.AThoran, h.Adrian_Elyse, h.Skylan, h.ASolise, h.Lan], [h.Haelia, h.Skylan, h.ASolise, h.DGwyneth, h.Ivan, h.Lan], [h.Rimuru, h.Velufira, h.AThoran, h.Ivan, h.ASolise, h.Zolrath], [h.Zolrath, h.Lan, h.Rimuru, h.Ivan]]),
         expand_team([h.ALucius, [h.Jerome, h.Aurelia], [h.Melion, h.Tamrus, h.Randle], [h.Aurelia, h.Naroko], [h.Randle, h.Queen, h.Tamrus]]),
         expand_team([h.Atheus, [h.AEironn, h.Hildwin, h.ABrutus], h.Nyla, [h.Misha, h.Ivan, h.Emilia, h.Kren], h.Knox]),
-        expand_team([h.AAthalia, h.Rosaline, [h.Shuna, h.Lysander, h.AThoran], [h.Gavus, h.Shuna, h.Rimuru], h.Liberta]),
+        expand_team([h.AAthalia, h.Rosaline, [h.Shuna, h.Lysander, h.AThoran], [h.Gavus, h.Shuna, h.Rimuru], h.Liberta])],
     ),
 }
